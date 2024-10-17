@@ -1,11 +1,19 @@
 [project]
 name = "anki-discord"
 version = "0.1.0"
-description = "Add your description here"
+description = "This is a Discord app that automatically adds words to Anki"
 authors = [
     { name = "ue-sho", email = "tssu45@gmail.com" }
 ]
-dependencies = []
+dependencies = [
+    "beautifulsoup4>=4.12.3",
+    "gtts>=2.5.3",
+    "discord-py>=2.4.0",
+    "requests>=2.32.3",
+    "pydantic>=2.9.2",
+    "pydantic-settings>=2.5.2",
+    "tenacity>=9.0.0",
+]
 readme = "README.md"
 requires-python = ">= 3.8"
 
@@ -15,7 +23,9 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = []
+dev-dependencies = [
+    "mypy>=1.12.0",
+]
 
 [tool.hatch.metadata]
 allow-direct-references = true
