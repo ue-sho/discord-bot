@@ -25,10 +25,12 @@ build-backend = "hatchling.build"
 managed = true
 dev-dependencies = [
     "mypy>=1.12.0",
+    "types-requests>=2.32.0.20241016",
+    "types-beautifulsoup4>=4.12.0.20241020",
 ]
 
 [tool.hatch.metadata]
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/anki_discord"]
+packages = ["src"]
