@@ -1,33 +1,34 @@
+import string
+import os
+
 import requests
 from bs4 import BeautifulSoup
 from gtts import gTTS
-import string
-import os
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_exponential
 
-ANKI_MEDIA_DIR = "/Users/user_name/Library/Application Support/Anki2/User 1/collection.media"
 
+ANKI_MEDIA_DIR = "/Users/uesho/Library/Application Support/Anki2/User 1/collection.media"
 MAX_RETRIES = 3
 
 
-
-
-
-def is_english_word_or_phrase(text):
+def is_english_word_or_phrase(text: str) -> bool:
     words = text.split()
     return all(word.isalpha() for word in words)
 
-def contains_japanese(text):
+
+def contains_japanese(text: str) -> bool:
     for char in text:
         if '\u0800' <= char <= '\u4e00':
             return True
     return False
 
-def clean_filename(filename):
+
+def clean_filename(filename: str) -> str:
     valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
     return ''.join(c for c in filename if c in valid_chars)
 
-def add_audio_to_text(text):
+
+def add_audio_to_text(text: str) -> str:
     try:
         tts = gTTS(text, lang='en')
     except Exception as e:
@@ -39,6 +40,17 @@ def add_audio_to_text(text):
     audio_path = os.path.join(ANKI_MEDIA_DIR, audio_file)
     tts.save(audio_path)
     return f'{text} [sound:{audio_file}]'
+
+
+class EnglishWord:
+    def __init__(self, word, pronunciation, meaning, example):
+        self.word = word
+        self.pronunciation = pronunciation
+        self.meaning = meaning
+        self.example = example
+
+    def __str__(self):
+        return self.word
 
 
 @retry(
@@ -73,24 +85,7 @@ def search_word(word):
     except AttributeError:
         example = None
 
-    # Japanese translation
-    jp_url = f'https://eow.alc.co.jp/search?q={word}'
-    try:
-        jp_response = session.get(jp_url, headers=headers, timeout=10)
-        jp_response.raise_for_status()
-    except requests.exceptions.RequestException as e:
-        print(f"Error occurred while searching for Japanese translation of '{word}': {e}")
-        return pronunciation, None, meaning, example
-
-    jp_soup = BeautifulSoup(jp_response.text, 'html.parser')
-    try:
-        jp_translation_full = jp_soup.find('meta', {'name': 'description'}).get('content')
-        jp_translation_parts = jp_translation_full.split('...【発音】')  # Split on the delimiter
-        jp_translation = jp_translation_parts[0]  # Only keep the first part
-    except AttributeError:
-        jp_translation = None
-
-    return pronunciation, jp_translation, meaning, example
+    return EnglishWord(word, pronunciation, meaning, example)
 
 
 
