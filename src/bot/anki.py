@@ -57,28 +57,34 @@ def add_to_anki(text: str) -> dict:
     text_with_audio = add_audio_to_text(text)
     image = fetch_image_url(text)
 
+    example_with_color = english_word.example.replace("\n", "<br>").replace(
+        text, f'<span style="color:red;">{text}</span>'
+    )
+    back_content = f"""
+<div class="meaning">
+    <p>to delay doing something that you should do, usually because you do not want to do it</p>
+</div>
+<div class="example">
+    <h3>例文</h3>
+    <p>{example_with_color}</p>
+</div>
+<img src="{image}">
+<div class="etymology">
+    <h3>語源</h3>
+    <p>{english_word.etymology}</p>
+</div>
+<div class="situation">
+    <h3>使われる場面</h3>
+    <p>{english_word.situation}</p>
+</div>
+"""
+
     note_json = {
         "deckName": settings.deck_name,
         "modelName": "Basic",
-        "fields": {
-            "front": text_with_audio,
-            "example": english_word.example.replace("\n", "<br>").replace(
-                text, f'<span style="color:red;">{text}</span>'
-            ),
-            "meaning": english_word.meaning,
-            "etymology": english_word.etymology,
-            "situation": english_word.situation,
-        },
+        "fields": {"Front": text_with_audio, "Back": back_content},
         "options": {"allowDuplicate": False},
         "tags": [],
-        "audio": [
-            {
-                "url": "https://cdn.videvo.net/videvo_files/video/free/2015-06/small_watermarked/Contador_Glam_preview.mp4",
-                "filename": "countdown.mp4",
-                "fields": ["front"],
-            }
-        ],
-        "picture": [{"url": image, "filename": "black_cat.jpg", "fields": ["image"]}],
     }
     res = add_note(note_json)
 
