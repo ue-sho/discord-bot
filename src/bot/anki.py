@@ -1,7 +1,7 @@
 from bot.anki_connect import invoke
 from bot.anki_gpt import generate_note
-from bot.settings import settings
 from bot.english import add_audio_to_text, fetch_image_url
+from bot.settings import settings
 
 
 def get_all_decks() -> dict:
@@ -62,7 +62,7 @@ def add_to_anki(text: str) -> dict:
     )
     back_content = f"""
 <div class="meaning">
-    <p>to delay doing something that you should do, usually because you do not want to do it</p>
+    <p>{english_word.meaning}</p>
 </div>
 <div class="example">
     <h3>例文</h3>

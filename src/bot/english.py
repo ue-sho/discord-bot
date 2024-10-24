@@ -1,5 +1,5 @@
-import string
 import os
+import string
 
 import requests
 from bs4 import BeautifulSoup
@@ -10,7 +10,6 @@ from tenacity import (
     stop_after_attempt,
     wait_exponential,
 )
-
 
 ANKI_MEDIA_DIR = (
     "/Users/uesho/Library/Application Support/Anki2/User 1/collection.media"
