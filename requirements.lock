@@ -18,11 +18,16 @@ aiosignal==1.3.1
     # via aiohttp
 annotated-types==0.7.0
     # via pydantic
+anyio==4.6.2.post1
+    # via httpx
+    # via openai
 attrs==24.2.0
     # via aiohttp
 beautifulsoup4==4.12.3
     # via anki-discord
 certifi==2024.8.30
+    # via httpcore
+    # via httpx
     # via requests
 charset-normalizer==3.4.0
     # via requests
@@ -30,21 +35,36 @@ click==8.1.7
     # via gtts
 discord-py==2.4.0
     # via anki-discord
+distro==1.9.0
+    # via openai
 frozenlist==1.4.1
     # via aiohttp
     # via aiosignal
 gtts==2.5.3
     # via anki-discord
+h11==0.14.0
+    # via httpcore
+httpcore==1.0.6
+    # via httpx
+httpx==0.27.2
+    # via openai
 idna==3.10
+    # via anyio
+    # via httpx
     # via requests
     # via yarl
+jiter==0.6.1
+    # via openai
 multidict==6.1.0
     # via aiohttp
     # via yarl
+openai==1.52.1
+    # via anki-discord
 propcache==0.2.0
     # via yarl
 pydantic==2.9.2
     # via anki-discord
+    # via openai
     # via pydantic-settings
 pydantic-core==2.23.4
     # via pydantic
@@ -55,11 +75,18 @@ python-dotenv==1.0.1
 requests==2.32.3
     # via anki-discord
     # via gtts
+sniffio==1.3.1
+    # via anyio
+    # via httpx
+    # via openai
 soupsieve==2.6
     # via beautifulsoup4
 tenacity==9.0.0
     # via anki-discord
+tqdm==4.66.5
+    # via openai
 typing-extensions==4.12.2
+    # via openai
     # via pydantic
     # via pydantic-core
 urllib3==2.2.3

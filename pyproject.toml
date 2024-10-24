@@ -13,6 +13,7 @@ dependencies = [
     "pydantic>=2.9.2",
     "pydantic-settings>=2.5.2",
     "tenacity>=9.0.0",
+    "openai>=1.52.1",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"
@@ -34,3 +35,6 @@ allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src"]
+
+[tool.ruff.lint]
+extend-select = ["I"]

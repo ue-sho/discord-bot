@@ -17,6 +17,7 @@ from bot.settings import settings
 def format_request(action: str, **params) -> dict:
     return {"action": action, "params": params, "version": 6}
 
+
 def invoke(action: str, **params) -> dict:
     """Makes a request to AnkiConnect to perform an action using given params.
 
@@ -28,12 +29,14 @@ def invoke(action: str, **params) -> dict:
         A dict with "result" and "error" keys.
 
     Raises:
-        - Exception: generic error 😭
+        - Exception: generic error
     """
     # format and send request
-    request_dict: dict = format_request(action, **params)
-    request_json: str = json.dumps(request_dict).encode("utf-8")
-    request = urllib.request.urlopen(urllib.request.Request(settings.anki_connect_url, request_json))
+    request_dict = format_request(action, **params)
+    request_json = json.dumps(request_dict).encode("utf-8")
+    request = urllib.request.urlopen(
+        urllib.request.Request(settings.anki_connect_url, request_json)
+    )
     response: dict = json.load(request)
 
     # Raise errors if any
