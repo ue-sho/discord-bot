@@ -27,7 +27,6 @@ async def on_ready():
     description="Add English word or phrase to Anki. Only uesho can be used.",
 )
 async def add_english(interaction: discord.Interaction, text: str):
-    print(str(interaction.user))
     if str(interaction.user) != "uesholib":
         await interaction.response.send_message(
             f"{interaction.user} のメッセージは禁止してるよ"
@@ -36,7 +35,7 @@ async def add_english(interaction: discord.Interaction, text: str):
 
     if is_english_word_or_phrase(text):
         add_to_anki(text)
-        await interaction.response.send_message("追加したよ")
+        await interaction.response.send_message(f"{text} を追加したよ")
 
 
 def discord_run():
