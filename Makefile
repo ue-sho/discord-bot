@@ -7,7 +7,7 @@ lint/fix:
 lint:
 	uv run ruff check
 	uv run ruff format --check
-	uv run mypy --explicit-package-bases src tests
+	uv run mypy src
 
 .PHONY: run
 run:
