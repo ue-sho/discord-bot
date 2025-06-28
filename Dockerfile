@@ -12,8 +12,7 @@ COPY pyproject.toml ./
 COPY src ./src
 
 # Install dependencies using uv
-# We install dev dependencies as well for linting/testing in CI/CD, but for production, you might want to remove [dev]
-RUN uv pip install --system -e ".[dev]"
+RUN uv pip install --system -e "."
 
 # Command to run the application
 # This assumes your bot's main entry point is src/main.py

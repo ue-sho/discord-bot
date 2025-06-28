@@ -1,5 +1,5 @@
 [project]
-name = "anki-discord"
+name = "discord-bot"
 version = "0.1.0"
 description = "This is a Discord app that automatically adds words to Anki"
 authors = [
@@ -15,7 +15,6 @@ dependencies = [
     "tenacity>=9.0.0",
     "openai>=1.52.1",
 ]
-readme = "README.md"
 requires-python = ">= 3.8"
 
 [build-system]
