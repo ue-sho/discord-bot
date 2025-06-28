@@ -1,19 +1,15 @@
 .PHONY: lint/fix
 lint/fix:
-	rye lint --fix
-	rye fmt
+	uv run ruff check --fix
+	uv run ruff format
 
 .PHONY: lint
 lint:
-	rye lint
-	rye fmt --check
-	rye run mypy --explicit-package-bases src tests
-
-.PHONY: test
-test:
-	set -o allexport; . ./.test.env; set +o allexport && rye test
+	uv run ruff check
+	uv run ruff format --check
+	uv run mypy --explicit-package-bases src tests
 
 .PHONY: run
 run:
 	set -o allexport; . ./.env; set +o allexport && \
-	PYTHONPATH="src" rye run python src/main.py
+	PYTHONPATH="src" uv run python src/main.py

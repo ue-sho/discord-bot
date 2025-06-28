@@ -1,13 +1,8 @@
-# environment variables
-.env
-
-# python generated files
+.venv/
+.pytest_cache/
 __pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
-
-# venv
-.venv
+*.pyc
+*.pyo
+*.pyd
+.env
+.env.test
