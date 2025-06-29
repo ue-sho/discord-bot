@@ -37,6 +37,13 @@ async def add_english(interaction: discord.Interaction, text: str):
         add_to_anki(text)
         await interaction.response.send_message(f"{text} を追加したよ")
 
+@tree.command(
+    name="ping",
+    description="Ping the bot to check if it's alive.",
+)
+async def ping(interaction: discord.Interaction):
+    await interaction.response.send_message("Pong! The bot is alive.")
+
 
 def discord_run():
     client.run(settings.discord_token)
