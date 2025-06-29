@@ -1,5 +1,5 @@
-# Use a lightweight Python base image
-FROM python:3.12-slim-bookworm
+# Use a lightweight Python base image for ARM64 architecture
+FROM arm64v8/python:3.12-slim-bookworm
 
 # Set the working directory in the container
 WORKDIR /app
