@@ -18,7 +18,7 @@ tree = app_commands.CommandTree(client)
 
 @client.event
 async def on_ready():
-    print(f"We have logged in as {client.user}")
+    logger.info(f"We have logged in as {client.user}")
     await tree.sync()
 
 
@@ -46,4 +46,9 @@ async def ping(interaction: discord.Interaction):
 
 
 def discord_run():
-    client.run(settings.discord_token)
+    logger.info("Attempting to start Discord bot...")
+    try:
+        client.run(settings.discord_token)
+    except Exception as e:
+        logger.error(f"Discord bot encountered an error: {e}", exc_info=True)
+    logger.info("Discord bot has stopped.")
